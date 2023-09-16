@@ -72,5 +72,7 @@ obligacje_final_table_pop <- obligacje_final_table %>%
          `Zabezpieczenie`=`Zabezpieczenie:`,`Strona www emitenta`) %>%
   rename_with(.fn = ~paste(., miesiac_rok_statystyk), .cols = c(`Liczba transakcji`, `Liczba dni z transakcjami`, `Obroty [tys]`))
 
-write.csv(obligacje_final_table_pop, "Data/obligacje_final_table.csv", row.names = F)
+print(head(obligacje_final_table_pop))
+
+write.csv(obligacje_final_table_pop, paste0("Data/obligacje_final_table_", Sys.Date(),".csv"), row.names = F)
 
