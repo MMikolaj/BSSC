@@ -29,7 +29,13 @@ jobs:
         run: Rscript R/update_dates.R
       - name: Commit results
         run: |
-          git add -A
-          git commit -m 'Bond dates updated' || echo "No changes to commit"
-          git push origin || echo "No changes to commit"
+          git config --local user.name actions-user
+          git config --local user.email "actions@github.com"
+          git add data/*
+          git commit -am "GH ACTION Headlines $(date)"
+          git push origin main
+        env:
+          REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+          username: github-actions
+      
 
