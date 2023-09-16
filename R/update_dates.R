@@ -67,9 +67,9 @@ obligacje_final_table_pop <- obligacje_final_table %>%
   select(Ticker, `Nazwa emitenta`,Waluta,`Rynek`=`Rynek:`,`Wartosc nominalna`,
          `Data poprzedniej wypłaty`=Data_poprzedniej_wyplaty,`Data nastepnej wypłaty`= Data_najblizszej_wyplaty,
          `Rodzaj oprocentowania obligacji`, WIBOR,Oprocentowanie,`Oprocentowanie w bieżącym okresie odsetkowym (%)`, `Odsetki skumulowane`,
-         `Liczba transakcji`=N_transakcji, `Liczba dni z transakcjami`=N_dni_z_transakcjami, `Obroty [tys]`=Obroty_tys,
+         `Liczba transakcji`=N_transakcji, `Liczba dni z transakcjami`=N_dni_z_transakcjami, `Obroty [tys.]`=Obroty_tys,
          `Data autoryzacji`, `Data pierwszego notowania`,`Data wykupu`,`Wartosc emisji`,
-         `Zabezpieczenie`=`Zabezpieczenie:`,`Strona WWW emitenta`) %>%
+         `Zabezpieczenie`=`Zabezpieczenie:`,`Strona ww emitenta`) %>%
   rename_with(.fn = ~paste(., miesiac_rok_statystyk), .cols = c(`Liczba transakcji`, `Liczba dni z transakcjami`, `Obroty [tys]`))
 
 print(head(obligacje_final_table_pop))
