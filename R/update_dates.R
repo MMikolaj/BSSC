@@ -1,6 +1,7 @@
 library(tidyr)
 library(dplyr)
 library(stringr)
+library(readxl)
 
 source("R/variables.R")
 
@@ -9,9 +10,11 @@ load("Data/shared_data/obligacje_pl_data.RData")
 ## ok udało sie pobrac statystyki teraz musze wyciagac z nich dane
 
 sheet <- "notowania"
+print(sheet)
+print(statystyki_filename)
 
 ## najpierw wyciagam tylko pierwsza kolumne, zeby odczytac z niej pozycje kolejnych kategorii obligacji (korporacyjne, skarbowe itd)
-statystyki_col1 <- readxl::read_excel(statystyki_filename, sheet=sheet, range = cellranger::cell_cols(1), col_names = F) %>%
+statystyki_col1 <- readxl::read_excel(path = statystyki_filename, sheet=sheet, range = cellranger::cell_cols(1), col_names = F) %>%
   .[,1] %>%
   unlist() %>%
   as.vector()
@@ -24,7 +27,7 @@ statystyki_skarbowe_end <- which(grepl("Listy zastawne hipoteczne", statystyki_c
 
 ##
 ## wyciagam rok i miesiac statytyk z pierwszej zakladki excelki
-miesiac_rok_statystyk <- readxl::read_excel(statystyki_filename, sheet = "ogółem", range="A6", col_names = F) %>% pull
+miesiac_rok_statystyk <- readxl::read_excel(path=statystyki_filename, sheet = "ogółem", range="A6", col_names = F) %>% pull
 
 ## ok teraz wyciagam  odpowiednie dane
 statystyki_dane <-
