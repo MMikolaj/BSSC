@@ -1,4 +1,7 @@
-library(tidyverse)
+library(tidyr)
+library(dplyr)
+library(stringr)
+
 source("R/variables.R")
 
 load("Data/shared_data/catalyst_table.RData")
@@ -67,3 +70,4 @@ obligacje_final_table_pop <- obligacje_final_table %>%
   rename_with(.fn = ~paste(., miesiac_rok_statystyk), .cols = c(`Liczba transakcji`, `Liczba dni z transakcjami`, `Obroty [tys]`))
 
 write.csv(obligacje_final_table_pop, "Data/obligacje_final_table.csv", row.names = F)
+
