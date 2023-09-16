@@ -17,7 +17,7 @@ on:
 jobs:
   render:
     name: Update bond dates
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: r-lib/actions/setup-r@v2
