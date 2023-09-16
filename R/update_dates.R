@@ -70,7 +70,7 @@ obligacje_final_table_pop <- obligacje_final_table %>%
          `Liczba transakcji`=N_transakcji, `Liczba dni z transakcjami`=N_dni_z_transakcjami, `Obroty [tys.]`=Obroty_tys,
          `Data autoryzacji`, `Data pierwszego notowania`,`Data wykupu`,`Wartosc emisji`,
          `Zabezpieczenie`=`Zabezpieczenie:`,`Strona www emitenta`) %>%
-  rename_with(.fn = ~paste(., miesiac_rok_statystyk), .cols = c(`Liczba transakcji`, `Liczba dni z transakcjami`, `Obroty [tys]`))
+  rename_with(.fn = ~paste(., miesiac_rok_statystyk), .cols = c(`Liczba transakcji`, `Liczba dni z transakcjami`, `Obroty [tys.]`))
 
 print(head(obligacje_final_table_pop))
 
