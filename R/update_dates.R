@@ -2,6 +2,7 @@ library(tidyr)
 library(dplyr)
 library(stringr)
 library(readxl)
+library(writexl)
 
 source("R/variables.R")
 
@@ -52,9 +53,9 @@ obligacje_final_table <- left_join(catalyst_table,
 ### uporządkować
 
 
-obligacje_final_table_pop <- obligacje_final_table %>%
-  mutate(`Typ oprocentowania`=sub("stałe |zmienne ", "", `Typ oprocentowania:`)) %>%
-  separate(`Typ oprocentowania:`, into=c("WIBOR", "Oprocentowanie"), sep=" \\+ ") %>%
+obligacje_final_table_pop <-  obligacje_final_table %>%
+  mutate(`Typ oprocentowania:`=sub("stałe |zmienne ", "", `Typ oprocentowania:`)) %>%
+  separate(`Typ oprocentowania:`, into=c("WIBOR", "Oprocentowanie"), sep=" \\+  ") %>%
   mutate(Oprocentowanie = ifelse(is.na(Oprocentowanie), WIBOR, Oprocentowanie),
          WIBOR = str_remove(WIBOR, "\\d%|\\d\\.\\d*%"),
          Obroty_tys_EUR=ifelse(Obroty_tys_PLN==Obroty_tys_EUR,NA, Obroty_tys_EUR ),
@@ -78,5 +79,7 @@ obligacje_final_table_pop <- obligacje_final_table %>%
 
 print(head(obligacje_final_table_pop))
 
-write.csv(obligacje_final_table_pop, paste0("Data/obligacje_final_table",".csv"), row.names = F)
 
+write.csv(obligacje_final_tableopro_pop, paste0("Data/obligacje_screener",".csv"), row.names = F)
+
+write_xlsx(obligacje_final_table_pop,"Data/obligacje_screener.xlsx")
