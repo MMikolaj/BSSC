@@ -29,6 +29,7 @@ statystyki_skarbowe_end <- which(grepl("Listy zastawne hipoteczne", statystyki_c
 ## wyciagam rok i miesiac statytyk z pierwszej zakladki excelki
 miesiac_rok_statystyk <- readxl::read_excel(path=statystyki_filename, sheet = "ogółem", range="A6", col_names = F) %>% pull
 
+
 ## ok teraz wyciagam  odpowiednie dane
 statystyki_dane <-
   readxl::read_excel(
@@ -57,7 +58,10 @@ obligacje_final_table_pop <- obligacje_final_table %>%
   mutate(Oprocentowanie = ifelse(is.na(Oprocentowanie), WIBOR, Oprocentowanie),
          WIBOR = str_remove(WIBOR, "\\d%|\\d\\.\\d*%"),
          Obroty_tys_EUR=ifelse(Obroty_tys_PLN==Obroty_tys_EUR,NA, Obroty_tys_EUR ),
-         Obroty_tys=coalesce(Obroty_tys_PLN, Obroty_tys_PLN)
+         Obroty_tys=coalesce(Obroty_tys_PLN, Obroty_tys_PLN),
+         `Dni do następnej wypłaty`=Data_najblizszej_wyplaty- Sys.Date(),
+         `Dni od poprzedniej wypłaty`=Sys.Date()-Data_poprzedniej_wyplaty,
+
          # Waluta = ifelse(!is.na(`Wartość nominalna (PLN)`), "PLN", "EUR"),
          # `Wartość nominalna`=coalesce(`Wartość nominalna (PLN)`, `Wartość nominalna (EUR)`),
          # `Wartość emisji`=coalesce(`Wartość emisji (PLN)`, `Wartość emisji (EUR)`),
@@ -65,7 +69,7 @@ obligacje_final_table_pop <- obligacje_final_table %>%
          # `Odsetki skumulowane`=sub(",", ".", `Odsetki skumulowane`)
   ) %>%
   select(Ticker, `Nazwa emitenta`,Waluta,`Rynek`=`Rynek:`,`Wartosc nominalna`,
-         `Data poprzedniej wypłaty`=Data_poprzedniej_wyplaty,`Data nastepnej wypłaty`= Data_najblizszej_wyplaty,
+         `Data poprzedniej wypłaty`=Data_poprzedniej_wyplaty,`Dni od poprzedniej wypłaty`, `Data nastepnej wypłaty`= Data_najblizszej_wyplaty, `Dni do następnej wypłaty`,
          `Rodzaj oprocentowania obligacji`, WIBOR,Oprocentowanie,`Oprocentowanie w bieżącym okresie odsetkowym (%)`, `Odsetki skumulowane`,
          `Liczba transakcji`=N_transakcji, `Liczba dni z transakcjami`=N_dni_z_transakcjami, `Obroty [tys.]`=Obroty_tys,
          `Data autoryzacji`, `Data pierwszego notowania`,`Data wykupu`,`Wartosc emisji`,
