@@ -80,10 +80,6 @@ obligacje_final_table_pop <-  obligacje_final_table %>%
 print(head(obligacje_final_table_pop))
 
 
-<<<<<<< HEAD
 write.csv(obligacje_final_table_pop, paste0("Data/obligacje_screener",".csv"), row.names = F)
-=======
-write.csv(obligacje_final_tableopro_pop, paste0("Data/obligacje_screener",".csv"), row.names = F)
->>>>>>> ff2aa372df1d5da354cac59b11e6bb41a0c948fc
 
 write_xlsx(obligacje_final_table_pop,"Data/obligacje_screener.xlsx")
