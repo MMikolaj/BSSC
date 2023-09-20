@@ -18,7 +18,10 @@ drive_user()
 
 drive_find("screener-obligacji")
 
-gs4_create(
-  "obligacje/mtcars_test",
-  sheets = list(mtcars_test = mtcars)
-)
+df <- data.frame(x = 1:3, y = letters[1:3])
+
+
+
+ss <- gs4_create("testy-hedgehog", sheets = df)
+
+sheet_write(chickwts, ss)
