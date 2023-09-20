@@ -16,7 +16,9 @@ gs4_auth(token = drive_token())
 
 drive_user()
 
-drive_find("screener-obligacji")
+drive_find("screener-obligacji") %>%
+  sheet_write(mtcars, sheet = "mtcars")
+
 
 df <- data.frame(x = 1:3, y = letters[1:3])
 
