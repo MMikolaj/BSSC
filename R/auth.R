@@ -24,4 +24,4 @@ df <- data.frame(x = 1:3, y = letters[1:3])
 
 ss <- gs4_create("testy-hedgehog", sheets = df)
 
-sheet_write(chickwts, ss)
+sheet_write(ss)
