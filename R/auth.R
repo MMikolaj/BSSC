@@ -11,7 +11,10 @@ library(gargle)
 options(gargle_oauth_cache = ".secrets")
 gargle::gargle_oauth_cache()
 
-googlesheets4::sheets_auth()
+drive_auth()
+gs4_auth(token = drive_token())
+
+drive_user()
 
 gs4_create(
   "mtcars_test",
