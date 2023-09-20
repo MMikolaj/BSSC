@@ -22,6 +22,7 @@ ss <- drive_get("screener-obligacji")
 
 read_sheet(ss)
 
+write_sheet(mtcars, ss, sheet = "mtcars")
 
 # drive_auth()
 # gs4_auth(token = drive_token())
