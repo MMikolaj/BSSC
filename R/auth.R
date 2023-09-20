@@ -11,19 +11,23 @@ library(gargle)
 options(gargle_oauth_cache = ".secrets")
 gargle::gargle_oauth_cache()
 
-drive_auth()
-gs4_auth(token = drive_token())
-
-drive_user()
-
-drive_find("screener-obligacji") %>%
-  sheet_write(mtcars, sheet = "mtcars")
 
 
-df <- data.frame(x = 1:3, y = letters[1:3])
+gs4_auth(scope = "https://www.googleapis.com/auth/drive")
+drive_auth(token = gs4_token())
+
+drive_find("screener-obligacji")
+
+ss <- drive_get("screener-obligacji")
+
+read_sheet(ss)
 
 
+# drive_auth()
+# gs4_auth(token = drive_token())
+#
+# drive_user()
+#
+# drive_find("screener-obligacji")
 
-ss <- gs4_create("testy-hedgehog", sheets = df)
 
-sheet_write(ss)
