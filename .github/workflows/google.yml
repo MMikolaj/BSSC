@@ -77,7 +77,7 @@ jobs:
         run: |
           Rscript -e 'access_token <- jsonlite::fromJSON(Sys.getenv("GOOGLE_APPLICATION_CREDENTIALS"))' \
                   -e 'names(access_token)' \
-                  -e 'options(gargle_oauth_cache = “.secrets”)' \
+                  -e 'options(gargle_oauth_cache = ".secrets")' \
                   -e 'gargle::gargle_oauth_cache()' \
 
 
