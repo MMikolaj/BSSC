@@ -10,3 +10,10 @@ names(access_token)
 library(gargle)
 options(gargle_oauth_cache = ".secrets")
 gargle::gargle_oauth_cache()
+
+googlesheets4::sheets_auth()
+
+gs4_create(
+  "mtcars_test",
+  sheets = list(mtcars_test = mtcars)
+)
