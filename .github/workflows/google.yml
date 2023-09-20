@@ -74,10 +74,6 @@ jobs:
       - name: Install dependencies
         run: Rscript -e 'install.packages(c("jsonlite", "gargle", "googlesheets4"))'
       - name: 'Explore access_token names'
-        run: |
-          Rscript -e 'access_token <- jsonlite::fromJSON(Sys.getenv("GOOGLE_APPLICATION_CREDENTIALS"))' \
-                  -e 'names(access_token)' \
-                  -e 'options(gargle::gargle_oauth_cache = ".secrets")' \
-                  -e 'gargle::gargle_oauth_cache()' \
+        run: Rscript R/auth.R
 
 
