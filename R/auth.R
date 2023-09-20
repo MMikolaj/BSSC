@@ -19,6 +19,6 @@ drive_user()
 drive_find("screener-obligacji")
 
 gs4_create(
-  "mtcars_test",
+  "obligacje/mtcars_test",
   sheets = list(mtcars_test = mtcars)
 )
