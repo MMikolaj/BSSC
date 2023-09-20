@@ -1,4 +1,7 @@
-
+library(jsonlite)
+library(googledrive)
+library(googlesheets4)
+library(gargle)
 
 access_token <- jsonlite::fromJSON(Sys.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
 
