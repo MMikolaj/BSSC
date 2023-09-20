@@ -60,8 +60,8 @@ obligacje_final_table_pop <-  obligacje_final_table %>%
          WIBOR = str_remove(WIBOR, "\\d%|\\d\\.\\d*%"),
          Obroty_tys_EUR=ifelse(Obroty_tys_PLN==Obroty_tys_EUR,NA, Obroty_tys_EUR ),
          Obroty_tys=coalesce(Obroty_tys_PLN, Obroty_tys_PLN),
-         `Dni do następnej wypłaty`=Data_najblizszej_wyplaty- Sys.Date(),
-         `Dni od poprzedniej wypłaty`=Sys.Date()-Data_poprzedniej_wyplaty,
+         `Dni do następnej wypłaty`=as.numeric(Data_najblizszej_wyplaty- Sys.Date()),
+         `Dni od poprzedniej wypłaty`=as.numeric(Sys.Date()-Data_poprzedniej_wyplaty),
 
          # Waluta = ifelse(!is.na(`Wartość nominalna (PLN)`), "PLN", "EUR"),
          # `Wartość nominalna`=coalesce(`Wartość nominalna (PLN)`, `Wartość nominalna (EUR)`),
@@ -83,3 +83,4 @@ print(head(obligacje_final_table_pop))
 write.csv(obligacje_final_table_pop, paste0("Data/obligacje_screener",".csv"), row.names = F)
 
 write_xlsx(obligacje_final_table_pop,"Data/obligacje_screener.xlsx")
+
