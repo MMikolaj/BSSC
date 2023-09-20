@@ -1,0 +1,12 @@
+Package: BSSC
+Title: Bonds Stock Screener and Callendar integrator
+Version: 0.0.1
+Authors@R:
+    c(person(given = "Mikolaj",
+             family = "Mazurkiewicz",
+             role = c("aut", "cre"),
+             email = "mikolajmazurkiewicz.90@gmail.com"))
+Description: Bonds Stock Screener and Callendar integrator.
+Imports: jsonlite, googledrive, googlesheets4, gargle
+Suggests: curl
+License: GPL (>= 2)
