@@ -5,8 +5,12 @@ on:
   push:
     branches: [ "main" ]
 
-permissions: 
+permissions:
+  deployments: write
   contents: write
+  statuses: write
+  actions: write
+  checks: read
 
 jobs:
   deploy:
