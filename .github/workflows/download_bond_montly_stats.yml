@@ -26,7 +26,7 @@ jobs:
       # - uses: r-lib/actions/setup-r-dependencies@v2
       - uses: wei/wget@v1
         with:
-          args: -O sample.html https://httpbin.org/html
+          args: -O Data/sample.html https://httpbin.org/html
       # - name: Download bond monthly stats
       #   run: wget -P Data/ -O statystyki_obligacji_downloaded_2023-10-02.xls https://gpwcatalyst.pl/pub/CATALYST/statystyki/statystyki_miesieczne/202308_CAT.xls
       #   # run: Rscript R/download_bond_monthly_stats.R
@@ -34,6 +34,6 @@ jobs:
         run: |
           git config --local user.name actions-user
           git config --local user.email "actions@github.com"
-          git add *
+          git add Data/*
           git commit -am "Bond stats downloaded on $(date)"
           git push origin main
