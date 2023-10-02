@@ -35,6 +35,7 @@ head <- httr::HEAD(paste0("https://gpwcatalyst.pl/pub/CATALYST/statystyki/statys
                           miesiac_do_ekstrakcji,
                           "_CAT.xls"))
 
+head
 
 if(grepl(pattern = "404", head$url)) {
 
