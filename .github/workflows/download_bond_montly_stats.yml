@@ -1,5 +1,4 @@
-name: download_bond_monthly_stats
-
+name: Download bond monthly stats
 on:
   schedule:
     - cron: '0 22 * * 0'
