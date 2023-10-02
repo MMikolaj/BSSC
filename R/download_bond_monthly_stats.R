@@ -20,7 +20,9 @@ download_statystyki_miesieczne <- function(miesiac, filename){
 
   download.file(path,
                 destfile =paste0(filename),
-                mode = "wb")
+                mode = "wget")
+
+
 }
 
 
