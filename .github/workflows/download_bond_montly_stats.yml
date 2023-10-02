@@ -19,7 +19,7 @@ jobs:
       # - uses: r-lib/actions/setup-r@v2
       # - uses: r-lib/actions/setup-r-dependencies@v2
       - name: Download bond monthly stats
-        run: wget -O Data/statystyki_obligacji_downloaded_2023-10-02.xls https://gpwcatalyst.pl/pub/CATALYST/statystyki/statystyki_miesieczne/202308_CAT.xls
+        run: wget -O statystyki_obligacji_downloaded_2023-10-02.xls https://gpwcatalyst.pl/pub/CATALYST/statystyki/statystyki_miesieczne/202308_CAT.xls
         # run: Rscript R/download_bond_monthly_stats.R
       - name: Commit results
         run: |
