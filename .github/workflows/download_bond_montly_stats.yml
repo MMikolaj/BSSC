@@ -5,35 +5,29 @@ on:
   push:
     branches: [ "main" ]
 
-permissions:
-  deployments: write
-  contents: write
-  statuses: write
-  actions: write
-  checks: read
+permissions: write-all
 
 jobs:
   deploy:
-    permissions: 
+    permissions:
       contents:  'read'
       id-token: 'write'
-      
+
     runs-on: ubuntu-latest
     steps:
 
       - uses: actions/checkout@v3
-      # - uses: r-lib/actions/setup-r@v2
-      # - uses: r-lib/actions/setup-r-dependencies@v2
-      - uses: wei/wget@v1
-        with:
-          args: -O Data/sample.html https://httpbin.org/html
-      # - name: Download bond monthly stats
-      #   run: wget -P Data/ -O statystyki_obligacji_downloaded_2023-10-02.xls https://gpwcatalyst.pl/pub/CATALYST/statystyki/statystyki_miesieczne/202308_CAT.xls
-      #   # run: Rscript R/download_bond_monthly_stats.R
-      # - name: Commit results
-      #   run: |
-      #     git config --local user.name actions-user
-      #     git config --local user.email "actions@github.com"
-      #     git add Data/*
-      #     git commit -am "Bond stats downloaded on $(date)"
-      #     git push origin main
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
+
+
+      - name: Download bond monthly stats
+        # run: wget -P Data/ -O statystyki_obligacji_downloaded_2023-10-02.xls https://gpwcatalyst.pl/pub/CATALYST/statystyki/statystyki_miesieczne/202308_CAT.xls
+        run: Rscript R/download_bond_monthly_stats.R
+      - name: Commit results
+        run: |
+          git config --local user.name actions-user
+          git config --local user.email "actions@github.com"
+          git add Data/*
+          git commit -am "Bond stats downloaded on $(date)"
+          git push origin main
