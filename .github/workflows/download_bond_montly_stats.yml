@@ -9,14 +9,10 @@ permissions: write-all
 
 jobs:
   deploy:
-    permissions:
-      contents:  'read'
-      id-token: 'write'
-
     runs-on: ubuntu-latest
     steps:
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - uses: suisei-cn/actions-download-file@v1.3.0
         id: downloadfile  # Remember to give an ID if you need the output filename
@@ -39,6 +35,6 @@ jobs:
           git add Data/*
           git commit -am "Bond stats update $(date)"
           git push origin main
-        env:
-          REPO_KEY: ${{secrets.GITHUB_TOKEN}}
-          username: github-actions
+        # env:
+        #   REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+        #   username: github-actions
