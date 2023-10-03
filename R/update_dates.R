@@ -84,3 +84,33 @@ write.csv(obligacje_final_table_pop, paste0("Data/obligacje_screener",".csv"), r
 
 write_xlsx(obligacje_final_table_pop,"Data/obligacje_screener.xlsx")
 
+
+
+#### uploading to google drive ####
+
+
+library(jsonlite)
+library(googledrive)
+library(googlesheets4)
+library(gargle)
+
+access_token <- jsonlite::fromJSON(Sys.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
+
+names(access_token)
+
+library(gargle)
+options(gargle_oauth_cache = ".secrets")
+gargle::gargle_oauth_cache()
+
+
+
+gs4_auth(scope = "https://www.googleapis.com/auth/drive")
+drive_auth(token = gs4_token())
+
+drive_find("screener-obligacji") ### dla sprawdzenia czy znajduje plik
+
+ss <- drive_get("screener-obligacji")
+
+write_sheet(obligacje_final_table_pop, ss, sheet = "screener")
+
+
