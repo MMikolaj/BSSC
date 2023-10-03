@@ -7,6 +7,6 @@ Authors@R:
              role = c("aut", "cre"),
              email = "mikolajmazurkiewicz.90@gmail.com"))
 Description: Bonds Stock Screener and Callendar integrator.
-Imports: jsonlite, googledrive, googlesheets4, gargle, httr, lubridate
+Imports: jsonlite, googledrive, googlesheets4, gargle, httr, lubridate, tidyr, dplyr, stringr, readxl, writexl
 Suggests: curl
 License: GPL (>= 2)
