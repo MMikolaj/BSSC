@@ -29,6 +29,9 @@ jobs:
         run: |
           git config --local user.name actions-user
           git config --local user.email "actions@github.com"
-          git add statystyki_obligacji_downloaded_2023-10-02.xls
-          git commit -am "Bond stats downloaded on $(date)"
+          git add Data/*
+          git commit -am "Bond stats update $(date)"
           git push origin main
+        # env:
+        #   REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+        #   username: github-actions
