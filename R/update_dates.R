@@ -8,7 +8,7 @@ source("R/variables.R")
 
 load("Data/shared_data/catalyst_table.RData")
 load("Data/shared_data/obligacje_pl_data.RData")
-## ok udało sie pobrac statystyki teraz musze wyciagac z nich dane
+
 
 sheet <- "notowania"
 print(sheet)

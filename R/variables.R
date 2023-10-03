@@ -7,5 +7,5 @@
 
 ## nazwa pliku do zapisu statystyk (można pomyslec nad dodaniem do niej daty)
 
-statystyki_filename <- paste0("Data/statystyki_obligacji_downloaded_", Sys.Date(),".xls")
+statystyki_filename <- paste0("Data/statystyki_obligacji.xls")
 
