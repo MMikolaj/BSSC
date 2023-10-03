@@ -18,10 +18,13 @@ download_statystyki_miesieczne <- function(miesiac, filename){
                  "_CAT.xls")
 
 
-  download.file(path,
-                destfile =paste0(filename),mode = "wget", extra = "-O"
-                )
+  # download.file(path,
+  #               destfile =paste0(filename),mode = "wget", extra = "-O"
+  #               )
 
+  system_command <- paste0("wget ", path, " -O ", filename)
+  print(system_command)
+  system(system_command)
 
 }
 
@@ -43,12 +46,12 @@ if(grepl(pattern = "404", head$url)) {
 
   ## pomocniczna zmienna, ktora pozniej przyda sie do nagłówka kolumny w tabeli ze statystykami
   ## miesiac do ekstacji to miesiac juz o jeden wczesniej niz obecna data zatem wyzej wystarczy tylko odjac jeden
-  miesiac_rok_statystyk <-  format(Sys.Date()- months(2), "%B %Y")
+  # miesiac_rok_statystyk <-  format(Sys.Date()- months(2), "%B %Y")
 
 } else {
 
   download_statystyki_miesieczne(miesiac_do_ekstrakcji, statystyki_filename)
 
-  miesiac_rok_statystyk <-  format(Sys.Date()- months(1), "%B %Y")
+  # miesiac_rok_statystyk <-  format(Sys.Date()- months(1), "%B %Y")
 }
 
