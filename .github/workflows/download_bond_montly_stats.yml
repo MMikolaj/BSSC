@@ -32,13 +32,13 @@ jobs:
       # - name: Download bond monthly stats
         # run: wget -P Data/ -O statystyki_obligacji_downloaded_2023-10-02.xls https://gpwcatalyst.pl/pub/CATALYST/statystyki/statystyki_miesieczne/202308_CAT.xls
         # run: Rscript R/download_bond_monthly_stats.R
-      # - name: Commit results
-      #   run: |
-      #     git config --local user.name actions-user
-      #     git config --local user.email "actions@github.com"
-      #     git add Data/*
-      #     git commit -am "Bond stats update $(date)"
-      #     git push origin main
-        # env:
-        #   REPO_KEY: ${{secrets.GITHUB_TOKEN}}
-        #   username: github-actions
+      - name: Commit results
+        run: |
+          git config --local user.name actions-user
+          git config --local user.email "actions@github.com"
+          git add Data/*
+          git commit -am "Bond stats update $(date)"
+          git push origin main
+        env:
+          REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+          username: github-actions
