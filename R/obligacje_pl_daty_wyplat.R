@@ -1,4 +1,6 @@
-library(tidyverse)
+library(tidyr)
+library(dplyr)
+library(purrr)
 library(rvest)
 load("Data/shared_data/tickery.RData")
 
@@ -16,18 +18,8 @@ daty_wyplaty <- tickery %>%
   )
 
 
-## ostatnia wyplata i najblizsza
 
-
-## przetwarzam tabele z datami wyplat korzystajac z funkcji pomocniczej
-last_and_next_payment_dates <-full_join(
-  daty_wyplaty %>% filter(date>Sys.Date()) %>% group_by(Ticker) %>% top_n(-1) %>% rename(Data_najblizszej_wyplaty=date),
-  daty_wyplaty %>% filter(date<Sys.Date()) %>% group_by(Ticker) %>% top_n(1) %>% rename(Data_poprzedniej_wyplaty=date)
-)
-
-
-
-### obligacje.pl
+### obligacje.pl dane
 
 obligacjepl_table <- tickery %>%
   map_df(~read_html(paste0("https://obligacje.pl/pl/obligacja/", .x)) %>%
@@ -45,17 +37,19 @@ obligacjepl_table <- bind_cols(Ticker=tickery, obligacjepl_table)
 
 ### combining all together
 
-### to jest potrzebne do kalendarza
+### to jest potrzebne do kalendarza (NA RAZIE POMIJAM)
 
-daty_wyplat_w_details <-  left_join(daty_wyplaty,
-                                   select(catalyst_table, Ticker, Emitent=`Nazwa emitenta`,
-                                          `Data wykupu`, `Wartosc nominalna`, `Wartosc emisji`, Waluta)) %>%
-                          left_join(.,
-                                   select(obligacjepl_table, Ticker, Oprocentowanie=`Typ oprocentowania:`)) %>%
-                          group_by(Ticker) %>%
-                          mutate(numer_wyplaty = paste("#",seq_along(Ticker)))
+# daty_wyplat_w_details <-  left_join(daty_wyplaty,
+#                                    select(catalyst_table, Ticker, Emitent=`Nazwa emitenta`,
+#                                           `Data wykupu`, `Wartosc nominalna`, `Wartosc emisji`, Waluta)) %>%
+#                           left_join(.,
+#                                    select(obligacjepl_table, Ticker, Oprocentowanie=`Typ oprocentowania:`)) %>%
+#                           group_by(Ticker) %>%
+#                           mutate(numer_wyplaty = paste("#",seq_along(Ticker)))
 
 
 
-save(daty_wyplat_w_details,obligacjepl_table,last_and_next_payment_dates, file="Data/shared_data/obligacje_pl_data.RData")
+save(daty_wyplaty,
+     # daty_wyplat_w_details, (ODKOMENTOWAC POZNIEJ)
+     obligacjepl_table, file="Data/shared_data/obligacje_pl_data.RData")
 

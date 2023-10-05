@@ -7,7 +7,17 @@ library(writexl)
 source("R/variables.R")
 
 load("Data/shared_data/catalyst_table.RData")
-load("Data/shared_data/obligacje_pl_data.RData")
+load("Data/shared_data/obligacje_pl_data.RData") ## stad pochodza m.in daty wyplat
+
+
+## ostatnia wyplata i najblizsza
+
+
+## przetwarzam tabele z datami wyplat korzystajac z funkcji pomocniczej
+last_and_next_payment_dates <-full_join(
+  daty_wyplaty %>% filter(date>Sys.Date()) %>% group_by(Ticker) %>% top_n(-1) %>% rename(Data_najblizszej_wyplaty=date),
+  daty_wyplaty %>% filter(date<Sys.Date()) %>% group_by(Ticker) %>% top_n(1) %>% rename(Data_poprzedniej_wyplaty=date)
+)
 
 
 sheet <- "notowania"
