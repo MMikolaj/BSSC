@@ -2,8 +2,7 @@ name: "Download bond monthly stats"
 on:
   schedule:
     - cron: '0 22 * * 0'
-  push:
-    branches: [ "main" ]
+
 
 permissions: write-all
 
