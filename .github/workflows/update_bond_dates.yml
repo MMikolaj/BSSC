@@ -11,8 +11,6 @@ name: Update bond dates
 on:
   schedule:
     - cron: '0 23 * * *'
-  push:
-    branches: main
 
 permissions: write-all
 
