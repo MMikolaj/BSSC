@@ -28,6 +28,9 @@ cat("Funkcja gotowa")
 
 catalyst_korporacyjne <- "https://gpwcatalyst.pl/notowania-obligacji-obligacje-korporacyjne"
 catalyst_korporacyjne
+
+read_html(catalyst_korporacyjne)
+print("read dziala")
 # wyszykuje podstron dla każdego tickera
 catalyst_korporacyjne_podstrony <- read_html(catalyst_korporacyjne) %>%
   html_elements(".table-responsive .col1") %>%
