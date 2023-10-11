@@ -4,6 +4,7 @@ library(purrr)
 library(rvest)
 library(stringr)
 
+cat("Pakiety wczytane")
 
 ## helper fun ####
 get_catalyst_table <- function(x){
