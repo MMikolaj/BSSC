@@ -28,11 +28,13 @@ cat("Funkcja gotowa")
 
 catalyst_korporacyjne <- "https://gpwcatalyst.pl/notowania-obligacji-obligacje-korporacyjne"
 catalyst_korporacyjne
-## wyszykuje podstron dla każdego tickera
-# catalyst_korporacyjne_podstrony <- read_html(catalyst_korporacyjne) %>%
-#   html_elements(".table-responsive .col1") %>%
-#   html_node("a") %>%
-#   html_attr("href")
+# wyszykuje podstron dla każdego tickera
+catalyst_korporacyjne_podstrony <- read_html(catalyst_korporacyjne) %>%
+  html_elements(".table-responsive .col1") %>%
+  html_node("a") %>%
+  html_attr("href")
+
+catalyst_korporacyjne_podstrony
 #
 # catalyst_skarbowe<- "https://gpwcatalyst.pl/notowania-obligacji-obligacje-skarbowe"
 #
