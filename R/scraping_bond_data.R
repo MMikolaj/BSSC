@@ -49,13 +49,14 @@ catalyst_podstrony <- catalyst_podstrony[which(!is.na(catalyst_podstrony))]
 ## wyciągam same tickery z wektora z adresami podstron
 tickery <- str_split(catalyst_podstrony, "=", simplify = T)[,2]
 
+tickery
 
 ## dla każdego tickera wyciagam tabele z danymi i całość łącze w jedna tabele
 
 
 
 ### get table ####
-catalyst_table <- map(catalyst_podstrony, ~ get_catalyst_table(.x), .progress=T)
+catalyst_table <- map(catalyst_podstrony[1:10], ~ get_catalyst_table(.x), .progress=T)
 
 catalyst_table <- bind_rows(catalyst_table)
 
@@ -70,39 +71,39 @@ catalyst_table <- catalyst_table %>%
                     ifelse(!is.na(`Wartość emisji (EUR)`), "EUR", "nieznana"))) %>%
   select(-contains("EUR"), -contains("PLN"))
 
-
+catalyst_table
 ########################################################################################################
 ########################################################################################################
 ### obligacje.pl
 
 ## daty wyplat
 ## wyszukuje pelnej tabeli zawierajacej daty wyplat
-
-daty_wyplaty <- tickery %>%
-  map_df(~read_html(paste0("https://obligacje.pl/pl/obligacja/", .x)) %>%
-           html_nodes(xpath=".//h4[contains(.,'wypłaty')]/following-sibling::div[1]") %>%
-           html_elements("li") %>%
-           html_text() %>%
-           as.Date() %>%
-           data.frame("Ticker"=.x, "date"=.),
-         .progress=T
-  )
-
-#####  obligacjep.pl dane #############
-
-obligacjepl_table <- tickery %>%
-  map_df(~read_html(paste0("https://obligacje.pl/pl/obligacja/", .x)) %>%
-           html_elements("table") %>%
-           html_table()  %>%
-           .[[1]] %>%
-           pivot_wider(names_from = X1, values_from = X2) %>%
-           unnest(cols=everything()),
-         .progress=T
-  )
-
-obligacjepl_table <- bind_cols(Ticker=tickery, obligacjepl_table)
-
-
+#
+# daty_wyplaty <- tickery %>%
+#   map_df(~read_html(paste0("https://obligacje.pl/pl/obligacja/", .x)) %>%
+#            html_nodes(xpath=".//h4[contains(.,'wypłaty')]/following-sibling::div[1]") %>%
+#            html_elements("li") %>%
+#            html_text() %>%
+#            as.Date() %>%
+#            data.frame("Ticker"=.x, "date"=.),
+#          .progress=T
+#   )
+#
+# #####  obligacjep.pl dane #############
+#
+# obligacjepl_table <- tickery %>%
+#   map_df(~read_html(paste0("https://obligacje.pl/pl/obligacja/", .x)) %>%
+#            html_elements("table") %>%
+#            html_table()  %>%
+#            .[[1]] %>%
+#            pivot_wider(names_from = X1, values_from = X2) %>%
+#            unnest(cols=everything()),
+#          .progress=T
+#   )
+#
+# obligacjepl_table <- bind_cols(Ticker=tickery, obligacjepl_table)
+#
+#
 
 ### combining all together
 
@@ -120,9 +121,9 @@ obligacjepl_table <- bind_cols(Ticker=tickery, obligacjepl_table)
 
 save(tickery,
      catalyst_table,
-     daty_wyplaty,
+     # daty_wyplaty,
      # daty_wyplat_w_details, (ODKOMENTOWAC POZNIEJ)
-     obligacjepl_table,
+     # obligacjepl_table,
      file="Data/shared_data/obligacje_data.RData")
 
 
