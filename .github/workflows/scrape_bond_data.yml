@@ -13,8 +13,8 @@ jobs:
     name: Update bond dates
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: r-lib/actions/setup-r@master
+      - uses: actions/checkout@main
+      - uses: r-lib/actions/setup-r@main
       - uses: r-lib/actions/setup-r-dependencies@v2
       - name: Scrape the data
         run: Rscript R/scraping_bond_data.R
