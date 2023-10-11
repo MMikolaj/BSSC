@@ -21,6 +21,7 @@ get_catalyst_table <- function(x){
 
 get_catalyst_table <- possibly(.f= get_catalyst_table, otherwise = NA)
 
+cat("Funkcja gotowa")
 #### ekstrakcja z catalyst
 
 
@@ -46,32 +47,34 @@ catalyst_podstrony <- c(catalyst_korporacyjne_podstrony, catalyst_skarbowe_podst
 ## filtruje puste linki
 catalyst_podstrony <- catalyst_podstrony[which(!is.na(catalyst_podstrony))]
 
+print(catalyst_podstrony)
+
 ## wyciągam same tickery z wektora z adresami podstron
 tickery <- str_split(catalyst_podstrony, "=", simplify = T)[,2]
 
-tickery
+print(tickery)
 
 ## dla każdego tickera wyciagam tabele z danymi i całość łącze w jedna tabele
 
 
 
 ### get table ####
-catalyst_table <- map(catalyst_podstrony[1:10], ~ get_catalyst_table(.x), .progress=T)
-
-catalyst_table <- bind_rows(catalyst_table)
-
-catalyst_table <- bind_cols(Ticker=tickery, catalyst_table)
-
-catalyst_table <- catalyst_table %>%
-  mutate(
-    `Wartosc nominalna` = coalesce(`Wartość nominalna (PLN)`, `Wartość nominalna (EUR)`),
-    `Wartosc emisji` = coalesce(`Wartość emisji (PLN)`, `Wartość emisji (EUR)`),
-    `Odsetki skumulowane` = coalesce(`Odsetki skumulowane (wartość w PLN)`,`Odsetki skumulowane (wartość w EUR)`),
-    Waluta = ifelse(!is.na(`Wartość nominalna (PLN)`),"PLN",
-                    ifelse(!is.na(`Wartość emisji (EUR)`), "EUR", "nieznana"))) %>%
-  select(-contains("EUR"), -contains("PLN"))
-
-catalyst_table
+# catalyst_table <- map(catalyst_podstrony[1:10], ~ get_catalyst_table(.x), .progress=T)
+#
+# catalyst_table <- bind_rows(catalyst_table)
+#
+# catalyst_table <- bind_cols(Ticker=tickery, catalyst_table)
+#
+# catalyst_table <- catalyst_table %>%
+#   mutate(
+#     `Wartosc nominalna` = coalesce(`Wartość nominalna (PLN)`, `Wartość nominalna (EUR)`),
+#     `Wartosc emisji` = coalesce(`Wartość emisji (PLN)`, `Wartość emisji (EUR)`),
+#     `Odsetki skumulowane` = coalesce(`Odsetki skumulowane (wartość w PLN)`,`Odsetki skumulowane (wartość w EUR)`),
+#     Waluta = ifelse(!is.na(`Wartość nominalna (PLN)`),"PLN",
+#                     ifelse(!is.na(`Wartość emisji (EUR)`), "EUR", "nieznana"))) %>%
+#   select(-contains("EUR"), -contains("PLN"))
+#
+# catalyst_table
 ########################################################################################################
 ########################################################################################################
 ### obligacje.pl
