@@ -27,33 +27,33 @@ cat("Funkcja gotowa")
 
 
 catalyst_korporacyjne <- "https://gpwcatalyst.pl/notowania-obligacji-obligacje-korporacyjne"
-
+catalyst_korporacyjne
 ## wyszykuje podstron dla każdego tickera
-catalyst_korporacyjne_podstrony <- read_html(catalyst_korporacyjne) %>%
-  html_elements(".table-responsive .col1") %>%
-  html_node("a") %>%
-  html_attr("href")
-
-catalyst_skarbowe<- "https://gpwcatalyst.pl/notowania-obligacji-obligacje-skarbowe"
-
-## wyszykuje podstron dla każdego tickera
-catalyst_skarbowe_podstrony <- read_html(catalyst_skarbowe) %>%
-  html_elements(".table-responsive .col1") %>%
-  html_node("a") %>%
-  html_attr("href")
-
-catalyst_podstrony <- c(catalyst_korporacyjne_podstrony, catalyst_skarbowe_podstrony)
-
-
-## filtruje puste linki
-catalyst_podstrony <- catalyst_podstrony[which(!is.na(catalyst_podstrony))]
-
-print(catalyst_podstrony)
-
-## wyciągam same tickery z wektora z adresami podstron
-tickery <- str_split(catalyst_podstrony, "=", simplify = T)[,2]
-
-print(tickery)
+# catalyst_korporacyjne_podstrony <- read_html(catalyst_korporacyjne) %>%
+#   html_elements(".table-responsive .col1") %>%
+#   html_node("a") %>%
+#   html_attr("href")
+#
+# catalyst_skarbowe<- "https://gpwcatalyst.pl/notowania-obligacji-obligacje-skarbowe"
+#
+# ## wyszykuje podstron dla każdego tickera
+# catalyst_skarbowe_podstrony <- read_html(catalyst_skarbowe) %>%
+#   html_elements(".table-responsive .col1") %>%
+#   html_node("a") %>%
+#   html_attr("href")
+#
+# catalyst_podstrony <- c(catalyst_korporacyjne_podstrony, catalyst_skarbowe_podstrony)
+#
+#
+# ## filtruje puste linki
+# catalyst_podstrony <- catalyst_podstrony[which(!is.na(catalyst_podstrony))]
+#
+# print(catalyst_podstrony)
+#
+# ## wyciągam same tickery z wektora z adresami podstron
+# tickery <- str_split(catalyst_podstrony, "=", simplify = T)[,2]
+#
+# print(tickery)
 
 ## dla każdego tickera wyciagam tabele z danymi i całość łącze w jedna tabele
 
@@ -123,11 +123,11 @@ print(tickery)
 
 
 
-save(tickery,
-     catalyst_table,
-     # daty_wyplaty,
-     # daty_wyplat_w_details, (ODKOMENTOWAC POZNIEJ)
-     # obligacjepl_table,
-     file="Data/shared_data/obligacje_data.RData")
+# save(tickery,
+#      catalyst_table,
+#      # daty_wyplaty,
+#      # daty_wyplat_w_details, (ODKOMENTOWAC POZNIEJ)
+#      # obligacjepl_table,
+#      file="Data/shared_data/obligacje_data.RData")
 
 
