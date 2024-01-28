@@ -111,7 +111,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 var BASE_URL = "https://gpwcatalyst.pl/";
 var STATIC_URL = "https://gpwcatalyst.pl/";
 var AJAX_BASE_URL = "https://gpwcatalyst.pl/";
-var NOW = 1705875023000;
+var NOW = 1706479806000;
 var UTC_OFFSET = '1';
 var LANG = 'pl';
 var THEME = 'v4';
