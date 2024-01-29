@@ -1,7 +1,7 @@
 name: "Download bond monthly stats"
-on:
-  schedule:
-    - cron: '0 22 * * 0'
+# on:
+#   schedule:
+#     - cron: '0 22 * * 0'
 
 
 permissions: write-all
